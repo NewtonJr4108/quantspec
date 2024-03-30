@@ -1,0 +1,7 @@
+- When deployed, top button used to return to home must be tweaked by replacing all references of :
+
+ http://127.0.0.1:5000
+
+ to whatever the mainplage domain name is
+
+ - Add a scraping system to get news on particular stocks
