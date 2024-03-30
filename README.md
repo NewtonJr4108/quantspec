@@ -12,7 +12,4 @@ Currently using matplotlib-finance to graph stock prices.
 #To start project:
 - Initialize virtual environment
 ```
-
   source venv/bin/activate
-
-'''
