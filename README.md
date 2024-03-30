@@ -18,4 +18,3 @@ Currently using matplotlib-finance to graph stock prices.
 - Run Flask App
   ```
   flask run
-  '''
