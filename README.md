@@ -14,12 +14,10 @@ Currently using matplotlib-finance to graph stock prices.
 ```
   virtualenv venv
 ```
-
 -Activate virtual environment
 ```
   source venv/bin/activate
 ```
-
 - Run Flask App
   ```
   flask run
