@@ -14,7 +14,7 @@ Currently using matplotlib-finance to graph stock prices.
 ```
   virtualenv venv
 ```
--Activate virtual environment
+- Activate virtual environment
 ```
   source venv/bin/activate
 ```
