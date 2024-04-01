@@ -5,10 +5,15 @@ from flask import Flask, url_for, redirect, render_template_string, render_templ
 from plot.plt import graph
 import yfinance as yf
 
+from news.scrape import parse_source
 app = Flask(__name__)
 
 @app.route('/')
 def homepage():
+    #use source parsing module to organize data feed on homepage of website
+    print(parse_source())
+    
+    
     return render_template("main.html")
 
 @app.route('/index', methods = ['POST', 'GET'])
