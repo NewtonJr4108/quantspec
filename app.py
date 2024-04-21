@@ -33,7 +33,55 @@ def index():
             
             #print(data)
             #return render_template_string(last_quote)
-            return render_template_string(graph(stock))
+            
+            #formats so as to allow same CSS style in index
+            #also prevents white border error
+            header = """
+            <style>
+
+    .roboto-light {
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+    }
+        
+
+
+        h1{
+            font-family: sans-serif;
+            
+            
+            color: black;
+        }
+        h2{
+            font-family: sans-serif;
+
+            color: white;
+            
+        body{
+            
+            background-color: #36454f;
+;
+            
+            
+        }
+        }
+
+
+    </style>
+    
+    <style type="text/css">
+body { margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+margin-left: 0px
+}
+</style>
+
+            
+            """
+            return render_template_string(header+graph(stock)+
+                                    "\n<br><h1>hello</h1>")
         except IndexError:
             return render_template("stock_not_found.html")
         
