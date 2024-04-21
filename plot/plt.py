@@ -8,7 +8,6 @@ import plotly.express as px
 
 
 
-
 def graph(stock):
     yf.pdr_override()
     
@@ -24,7 +23,11 @@ def graph(stock):
 
 
     fig=go.Figure()
+    
     fig.layout._initialize_layout_template = "plotly_dark"
+    plotly_template = theme.templates["plotly_dark"]
+    theme.templates["plotly_dark_custom"] = theme.templates["plotly_dark"]
+
     
 
     fig.add_trace(go.Candlestick(x=df.index,
@@ -40,13 +43,19 @@ def graph(stock):
     fig.update_layout(
         
         title= name +" Current Share Price:",
-        yaxis_title='Stock Price (USD per Shares)'),
+        font=dict(family='Arial',
+                size=18, color='white'),
 
+        yaxis_title='Stock Price (USD per Share)',
+        plot_bgcolor='rgb(54, 69, 79)',
+        paper_bgcolor ='rgb(54, 69, 79)'),
+
+        
         
     
 
     #plot_bgcolor='#000000'
-
+    
     fig.update_xaxes(
         rangeslider_visible=True,
         rangeselector=dict(
@@ -60,6 +69,7 @@ def graph(stock):
         )
     
     )
+    #fig._config("{displaylogo: false}")
     fig.update_layout(modebar_remove=[
     'autoScale2d', 'autoscale', 'editInChartStudio', 'editinchartstudio', 'hoverCompareCartesian', 
     'hovercompare', 'lasso', 'lasso2d', 'orbitRotation', 'orbitrotation', 'pan', 'pan2d', 'pan3d', 
@@ -71,11 +81,25 @@ def graph(stock):
     'zoomIn2d', 'zoomInGeo', 'zoomInMapbox', 'zoomOut2d', 'zoomOutGeo', 'zoomOutMapbox', 
     'zoomin', 'zoomout'
 ])
+    
+    theme.templates['custom'] = go.layout.Template(
+    layout_paper_bgcolor='rgba(0,0,0,0)',
+    layout_plot_bgcolor='rgba(0,0,0,0)'
+    )
+    theme.templates.default = ('plotly+custom')
+
+    
+    
+
+    config = {'displayModeBar': False}
+    
+    
+
 
     
     
 
     #print(fig.to_html())
-    return fig.to_html()
+    return fig.to_html(config = config)
     
 #print(graph("tsla"))
