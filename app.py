@@ -4,7 +4,8 @@
 from flask import Flask, url_for, redirect, render_template_string, render_template, request
 from plot.plt import graph
 import yfinance as yf
-
+import time
+import os
 from news.scrape import parse_source
 app = Flask(__name__)
 
@@ -36,7 +37,11 @@ def index():
             
             #formats so as to allow same CSS style in index
             #also prevents white border error
+            
+            #<meta http-equiv="refresh" content="2">
+
             header = """
+
             <style>
 
     .roboto-light {
@@ -44,19 +49,39 @@ def index():
         font-weight: 300;
         font-style: normal;
     }
+    
+        footer{
+            
+            color: white;
+            font-family: sans-serif;
+            background-color: #36454f;
+            margin:0;
+
+
+            
+
+            
+            
+        }
         
 
 
         h1{
             font-family: sans-serif;
+            background-color: #36454f;
+            margin:0;
+
             
             
-            color: black;
+            color: white;
         }
         h2{
             font-family: sans-serif;
 
             color: white;
+            background-color: #36454f;
+            margin:0;
+
             
         body{
             
@@ -65,7 +90,28 @@ def index():
             
             
         }
+        
+        p{
+            
+            background-color: #36454f;
+            margin:0;
+
+            
         }
+        br{
+            color: #36454f;
+    
+            background-color: #36454f;
+            margin:0;
+
+        }
+        
+        
+        }
+        div{
+
+        margin: 0%;
+    }
 
 
     </style>
@@ -78,10 +124,46 @@ margin-left: 0px
 }
 </style>
 
+
+
+<div></div>
+
+<div id="no-background"></div>
+
+<h1>QuantSpec</h1>
+
+
+<div></div>
+
+
+
+
+
+
+
             
             """
-            return render_template_string(header+graph(stock)+
-                                    "\n<br><h1>hello</h1>")
+            
+            footer = '''
+            <center>
+            <footer>
+                <div class="row justify-content-center">
+                    <div class="col-md-7 text-center">
+            Copyright Matthew Anto / QuantSpec &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </a>
+                    </div>
+
+                </footer>
+                </center>
+                
+            '''
+            
+                
+            return render_template_string(header+graph(stock)+footer)
+
+                
+                
+            
+
         except IndexError:
             return render_template("stock_not_found.html")
         
@@ -89,4 +171,5 @@ margin-left: 0px
 def about():
     return render_template("about.html")
 if __name__ == "__main__":
-    app.run(debug=True)
+    
+    app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
