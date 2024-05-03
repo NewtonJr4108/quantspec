@@ -13,6 +13,10 @@ def graph(stock):
     
     stock_data = yf.Ticker(stock)
     
+    data = stock_data.history()
+    last_quote = '%.2f'%float(data['Close'].iloc[-1])
+
+    
     name = stock_data.info['longName']
 
     #stock=input("Enter a stock symbol: ")
@@ -42,11 +46,16 @@ def graph(stock):
 
     fig.update_layout(
         
-        title= name +" Current Share Price:",
+        
+        title= name +"\n"+str(last_quote),
         font=dict(family='Arial',
                 size=18, color='white'),
 
-        yaxis_title='Stock Price (USD per Share)',
+        #yaxis_title='Stock Price (USD per Share)',
+        #xaxis_rangeselector_activecolor='black',
+        xaxis_rangeselector_font_color='black',
+
+
         plot_bgcolor='rgb(54, 69, 79)',
         paper_bgcolor ='rgb(54, 69, 79)'),
 
