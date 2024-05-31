@@ -5,7 +5,7 @@ import numpy as np
 import plotly.graph_objs as go
 import plotly.io as theme
 import plotly.express as px 
-
+import time
 
 
 def graph(stock):
@@ -21,13 +21,13 @@ def graph(stock):
 
     #stock=input("Enter a stock symbol: ")
     #button is web dictates period
+    
     df = yf.download(tickers=stock,period='1d',interval='1m')
     
     #print(df)
 
 
-    fig=go.Figure()
-    
+    fig=go.Figure()    
     fig.layout._initialize_layout_template = "plotly_dark"
     plotly_template = theme.templates["plotly_dark"]
     theme.templates["plotly_dark_custom"] = theme.templates["plotly_dark"]
@@ -39,8 +39,10 @@ def graph(stock):
                     open=df['Open'],
                     high=df['High'],
                     low=df['Low'],
-                    close=df['Close'], name = 'market data'))
-                    
+                    close=df['Close'], name = 'market data')),
+    
+    #may not work
+    
     
     
 
@@ -56,7 +58,7 @@ def graph(stock):
         xaxis_rangeselector_font_color='black',
 
 
-        plot_bgcolor='rgb(54, 69, 79)',
+        plot_bgcolor='rgb(19, 46, 64)',
         paper_bgcolor ='rgb(54, 69, 79)'),
 
         
@@ -69,11 +71,12 @@ def graph(stock):
         rangeslider_visible=True,
         rangeselector=dict(
             buttons=list([
-                dict(count=15, label="15m", step="minute", stepmode="backward"),
-                dict(count=45, label="45m", step="minute", stepmode="backward"),
-                dict(count=1, label="HTD", step="hour", stepmode="todate"),
-                dict(count=3, label="3h", step="hour", stepmode="backward"),
-                dict(step="all")
+                dict(count=1440, label="1 Day", step="minute", stepmode="backward"),
+                dict(count=7, label="1 Week", step="day", stepmode="backward"),
+                dict(count=31, label="1 Month", step="day", stepmode="backward"),
+                dict(count=1, label="1Y", step="year", stepmode="backward"),
+                dict(count=5, label="5Y", step="year", stepmode="backward"),
+                dict(label = "max", step="all")
             ])
         )
     

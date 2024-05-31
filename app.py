@@ -8,11 +8,11 @@ import time
 import os
 from news.scrape import parse_source
 app = Flask(__name__)
+link = (parse_source()[1])
 
 @app.route('/')
 def homepage():
     #use source parsing module to organize data feed on homepage of website
-    print(parse_source())
     
     
     return render_template("main.html")
@@ -41,8 +41,15 @@ def index():
             #<meta http-equiv="refresh" content="2">
 
             header = """
+            
+            <meta name="theme-color" content="#000000">
+
+
+
 
             <style>
+            mix-blend-mode: multiply;
+
 
     .roboto-light {
         font-family: "Roboto", sans-serif;
@@ -122,7 +129,20 @@ margin-right: 0px;
 margin-bottom: 0px;
 margin-left: 0px
 }
+
+    form{
+
+        background-color: #36454f;
+        color: #ffffff;
+        font-family: sans-serif;
+        border-color: #36454f;
+
+
+    }
+
 </style>
+
+
 
 
 
@@ -132,8 +152,19 @@ margin-left: 0px
 
 <h1>QuantSpec</h1>
 
+<form action="/index" method="post" autocomplete="on">
+
+        <label for="stock">Enter valid symbol</label>
+
+        <input type="ticker" name="stock_index" placeholder="ex: AMZN"> 
+
+        <input type="submit">
+
+
 
 <div></div>
+
+
 
 
 
@@ -145,6 +176,14 @@ margin-left: 0px
             """
             
             footer = '''
+            
+                    <center>
+            <h1>Recent News:</h1>
+            <p>{{link}}</p>
+        </center>
+
+            
+            
             <center>
             <footer>
                 <div class="row justify-content-center">
